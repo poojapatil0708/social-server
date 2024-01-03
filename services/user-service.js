@@ -5,3 +5,9 @@ exports.createUserService = (data) => {
         .then(user => { return user })
         .catch(err => { throw err })
 }
+
+exports.getLoginService = (query) => {
+    return User.findOne(query)
+    .then(user => { return user })
+    .catch(err => {throw err})
+}
