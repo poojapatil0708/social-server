@@ -18,7 +18,7 @@ exports.loginUserController = (req, res) => {
     let query = { email: req.body.email, password: req.body.password }
     getUserService(query)
         .then(user => {
-            if (user) {
+            if (user) { 
                 res.status(status.OK).send({ user, message: 'User Login successfully' })
             }
             else {
