@@ -14,3 +14,9 @@ exports.getPostService = (query) => {
         .then(post => { return post })
         .catch(err => { throw err })
 }
+
+exports.deletePostService = (query) => {
+    return Post.deleteMany(query)
+        .then(res => res)
+        .catch(err => { throw err })
+}

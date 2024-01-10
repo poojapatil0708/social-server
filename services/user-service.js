@@ -8,6 +8,12 @@ exports.createUserService = (data) => {
 
 exports.getUserService = (query) => {
     return User.findOne(query)
-    .then(user => { return user })
-    .catch(err => {throw err})
+        .then(user => { return user })
+        .catch(err => { throw err })
+}
+
+exports.getMultipleUserService = (query) => {
+    return User.find(query)
+        .then(user => { return user })
+        .catch(err => { throw err })
 }

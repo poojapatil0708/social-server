@@ -1,6 +1,6 @@
 const { query } = require("express")
 const { status } = require("../constants")
-const { createUserService, getUserService } = require("../services/user-service")
+const { createUserService, getUserService, getMultipleUserService } = require("../services/user-service")
 
 exports.createUserController = (req, res) => {
     getUserService({ email: req.body.email })
@@ -18,7 +18,7 @@ exports.loginUserController = (req, res) => {
     let query = { email: req.body.email, password: req.body.password }
     getUserService(query)
         .then(user => {
-            if (user) { 
+            if (user) {
                 res.status(status.OK).send({ user, message: 'User Login successfully' })
             }
             else {
@@ -26,4 +26,11 @@ exports.loginUserController = (req, res) => {
             }
         })
         .catch(err => res.status(status.BAD_REQUEST).send({ message: 'Internel server error', err }))
+}
+
+exports.searchController = (req, res) => {
+    let query = { full_name: { $regex: req.params.full_name } }
+    getMultipleUserService(query)
+        .then(user => res.status(status.OK).send(user))
+        .catch(err => res.status(status.BAD_REQUEST).send({ err, message: 'Error to search user' }))
 }
