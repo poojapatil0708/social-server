@@ -29,7 +29,7 @@ exports.loginUserController = (req, res) => {
 }
 
 exports.searchController = (req, res) => {
-    let query = { full_name: { $regex: req.params.full_name } }
+    let query = { full_name: { $regex: req.params.full_name, $options: 'i' } }
     getMultipleUserService(query)
         .then(user => res.status(status.OK).send(user))
         .catch(err => res.status(status.BAD_REQUEST).send({ err, message: 'Error to search user' }))
